@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  Redirect,
+  Route,
+  Switch,
+} from "react-router-dom/cjs/react-router-dom.min";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import HandleAuthRedirect from "./pages/HandleAuthRedirect";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Switch>
+      <Route path="/" exact>
+        <Redirect to="/home" />
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/login" exact>
+        <Login />
+      </Route>
+      <Route path="/login/oauth2/code/public-client-react-app" exact>
+        <HandleAuthRedirect />
+      </Route>
+    </Switch>
   );
 }
 
